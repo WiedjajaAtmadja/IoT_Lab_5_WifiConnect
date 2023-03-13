@@ -1,8 +1,16 @@
 #include <Arduino.h>
 #include <WiFi.h>
+#include <ArduinoOTA.h>
+#include <Ticker.h>
+#define WIFI_SSID ""
+#define WIFI_PASSWORD ""
 
-#define WIFI_SSID "****"
-#define WIFI_PASSWORD "******"
+Ticker timer1Sec;
+void onTimer1Sec()
+{
+  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+  Serial.println("Hello World");
+}
 
 void setup()
 {
@@ -19,13 +27,12 @@ void setup()
   Serial.print("System connected with IP address: ");
   Serial.println(WiFi.localIP());
   Serial.printf("RSSI: %d\n", WiFi.RSSI());
+  ArduinoOTA.setHostname("esp32_iot8");
+  ArduinoOTA.begin();
+  timer1Sec.attach(1, onTimer1Sec);
 }
 
 void loop()
 {
-  //blink LED_BUILTIN
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(1000);
+  ArduinoOTA.handle();
 }
