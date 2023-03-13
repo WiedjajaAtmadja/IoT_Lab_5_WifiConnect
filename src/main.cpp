@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include <WiFi.h>
 
-#define WIFI_SSID "Lab-Eng"
-#define WIFI_PASSWORD "Lab-Eng123!"
+#define WIFI_SSID "****"
+#define WIFI_PASSWORD "******"
 
 void setup()
 {
